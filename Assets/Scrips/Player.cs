@@ -9,7 +9,7 @@ public class Player : Character
 
     public int lifeply, dmgenemy;
     public Animator anim;
-    public bool _dmged;
+    public bool _dmged = false;
     public GameController GameController;
 
     //Disparo
@@ -60,21 +60,18 @@ public class Player : Character
     }
 
     protected override void Dead()
-    {
-        if (lifeply <= 0)
-        {
-            GameObject.Destroy(this.gameObject);
-            GameController.Defeat();
-        }
+    {        
+        GameObject.Destroy(this.gameObject);
+        GameController.Defeat();
+        
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.transform.tag == "Enemy1" && !_dmged)
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Missile") && !_dmged)
         {
-            StartCoroutine(Damaged(1f));
-            Debug.Log("daño");
-            lifeply -= dmgenemy;            
+            lifeply -= dmgenemy;
+            if (lifeply <= 0) Dead(); else StartCoroutine(Damaged(1f));
         }
     }
 
@@ -82,12 +79,12 @@ public class Player : Character
     public IEnumerator Damaged(float valcrono)
     {
         _dmged = true;
-        anim.SetFloat("DMG", 2);
+        anim.SetBool("Dmged", _dmged);
 
         yield return new WaitForSeconds(valcrono);
 
         _dmged = false;
-        anim.SetFloat("DMG", 0);
+        anim.SetBool("Dmged", _dmged);
     }
 
 }

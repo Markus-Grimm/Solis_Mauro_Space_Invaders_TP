@@ -40,28 +40,26 @@ public class Enemy : Character
         _spriteRenderer.sprite = this.animSprite[_animFrame];
     }
 
-    
-    void Update()
-    {
-        Mov();
-    }
 
-    protected override void Dead() 
+    private void Dead(int score) 
     {
+        gameController.AumentoScore(score);
         this.killed.Invoke();
         this.gameObject.SetActive(false);
     }
 
-    protected override void Mov() { }
-
-    protected override void Shoot() { }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
-
         if (collider.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
-            Dead();
+            if (this.gameObject.layer == LayerMask.NameToLayer("GreatEnemy"))
+            {
+                Dead(100);
+            }
+            else
+            {
+                Dead(1);
+            }
         }
 
     }

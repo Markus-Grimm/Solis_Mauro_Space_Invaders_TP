@@ -7,15 +7,26 @@ public class Invaders : MonoBehaviour
     public int lines, columns;
     public Enemy[] enemy;
 
+    public GameController gameController;
+
     public Vector3 direction = Vector2.right;
     public AnimationCurve movspd;
+    public Projectile missilePrefab;
+
+    public float missileAttackRate;
 
     public int amountKilled { get; private set; }
+    public int amountAlive => this.totalInvaders - this.amountKilled;
     public int totalInvaders => this.lines * this.columns;
     public float percentKilled => (float)this.amountKilled / (float)this.totalInvaders;
 
     private void Start()
-    {                
+    {
+        gameController = GameController.FindObjectOfType<GameController>();
+        gameController.maxscr = totalInvaders;
+
+        missileAttackRate = 1.0f;
+        InvokeRepeating(nameof(MissileAttack), this.missileAttackRate, this.missileAttackRate);
 
         for (int line = 0; line < this.lines; line++)
         {
@@ -76,5 +87,23 @@ public class Invaders : MonoBehaviour
     private void InvaderKilled()
     {
         this.amountKilled++;
+    }
+
+    private void MissileAttack()
+    {
+        foreach (Transform enemy in this.transform)
+        {
+            if (!enemy.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+
+            if (Random.value < (1.0f / (float)this.amountAlive))
+            {
+                Instantiate(this.missilePrefab, enemy.position, Quaternion.identity);
+                break;
+            }
+        }
+
     }
 }

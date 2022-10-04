@@ -44,8 +44,8 @@ public class Enemy : Character
     private void Dead(int score) 
     {
         gameController.AumentoScore(score);
-        this.killed.Invoke();
-        this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false); 
+        this.killed.Invoke();        
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -54,7 +54,7 @@ public class Enemy : Character
         {
             if (this.gameObject.layer == LayerMask.NameToLayer("GreatEnemy"))
             {
-                Dead(100);
+                Dead(gameController.maxscr / 2);
             }
             else
             {

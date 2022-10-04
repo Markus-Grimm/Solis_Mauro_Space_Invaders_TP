@@ -106,10 +106,35 @@ public class Invaders : MonoBehaviour
 
                 if (Random.value < (1.0f / (float)this.amountAlive))
                 {
-                    Instantiate(this.missilePrefab, enemy.position, Quaternion.identity);
+                    GameObject projectil = ObjectPool.sharedInstance.GetPooledObject2();
+                    Projectile projectile = projectil.GetComponent<Projectile>();
+                    projectile.instanciate += ProjectileInstantiate;
+                    if (projectil != null)
+                    {
+                        projectil.transform.position = enemy.position;
+                        projectil.transform.rotation = Quaternion.identity;
+                        projectil.SetActive(true);
+                    }
+
+                    //ProjectileInstantiate();
+                    //Instantiate(this.missilePrefab, enemy.position, Quaternion.identity);
                     break;
                 }
             }
         }
+    }
+
+    private void ProjectileInstantiate()
+    {
+        GameObject projectil = ObjectPool.sharedInstance.GetPooledObject2();
+        Projectile projectile = projectil.GetComponent<Projectile>();
+        projectile.instanciate += ProjectileInstantiate;
+        if (projectil != null)
+        {
+            //projectil.transform.position = enemy.position;
+            projectil.transform.rotation = Quaternion.identity;
+            projectil.SetActive(true);
+        }
+
     }
 }

@@ -2869,5 +2869,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObjects: []
-  objectToPool: {fileID: 5981648505975763056, guid: a6a9bad3a8049e64eb59ae956e151c9c, type: 3}
-  amountToPool: 10
+  pooledObjects2: []
+  laser: {fileID: 5981648505975763056, guid: a6a9bad3a8049e64eb59ae956e151c9c, type: 3}
+  missile: {fileID: 5444606518397019155, guid: f127da197f4e38f4fabbb71b586d5fe9, type: 3}
+  amountToPool: 8
+  amountToPool2: 2

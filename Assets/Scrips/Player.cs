@@ -47,7 +47,6 @@ public class Player : Character
         {
             _shootActive = true; 
             this.GetComponent<AudioSource>().Play();
-            //Instantiate(this.projectilePrefab, this.transform.position + new Vector3(0, 0.6f, 0), Quaternion.identity);
             ProjectileInstantiate();
         }        
     }
@@ -63,15 +62,8 @@ public class Player : Character
             projectil.transform.rotation = Quaternion.identity;
             projectil.SetActive(true);
         }
-        //projectile.destroyed += ProjectileDestroyed;
         StartCoroutine(AttackSpeed(0.1f));
-
-    }
-
-    private void ProjectileDestroyed()
-    {
-        StartCoroutine(AttackSpeed(0.1f));
-    }
+    }     
 
     private IEnumerator AttackSpeed(float valcrono)
     {

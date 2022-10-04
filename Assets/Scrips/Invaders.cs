@@ -54,26 +54,30 @@ public class Invaders : MonoBehaviour
 
     private void Mov()
     {
-        this.transform.position += direction * this.movspd.Evaluate(this.percentKilled) * Time.deltaTime;
-
-        Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
-        Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
-
-        foreach (Transform enemy in this.transform)
+        if (!gameController.reset)
         {
-            if (!enemy.gameObject.activeInHierarchy)
+            this.transform.position += direction * this.movspd.Evaluate(this.percentKilled) * Time.deltaTime;
+
+            Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
+            Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
+
+            foreach (Transform enemy in this.transform)
             {
-                continue;
-            }
-            if (direction == Vector3.right && enemy.position.x >= (rightEdge.x - 1.0f))
-            {
-                AdvanceLine();
-            }
-            else if (direction == Vector3.left && enemy.position.x <= (leftEdge.x + 1.0f))
-            {
-                AdvanceLine();
+                if (!enemy.gameObject.activeInHierarchy)
+                {
+                    continue;
+                }
+                if (direction == Vector3.right && enemy.position.x >= (rightEdge.x - 1.0f))
+                {
+                    AdvanceLine();
+                }
+                else if (direction == Vector3.left && enemy.position.x <= (leftEdge.x + 1.0f))
+                {
+                    AdvanceLine();
+                }
             }
         }
+        
     }
     private void AdvanceLine()
     {
@@ -91,19 +95,21 @@ public class Invaders : MonoBehaviour
 
     private void MissileAttack()
     {
-        foreach (Transform enemy in this.transform)
+        if (!gameController.reset)
         {
-            if (!enemy.gameObject.activeInHierarchy)
+            foreach (Transform enemy in this.transform)
             {
-                continue;
-            }
+                if (!enemy.gameObject.activeInHierarchy)
+                {
+                    continue;
+                }
 
-            if (Random.value < (1.0f / (float)this.amountAlive))
-            {
-                Instantiate(this.missilePrefab, enemy.position, Quaternion.identity);
-                break;
+                if (Random.value < (1.0f / (float)this.amountAlive))
+                {
+                    Instantiate(this.missilePrefab, enemy.position, Quaternion.identity);
+                    break;
+                }
             }
         }
-
     }
 }

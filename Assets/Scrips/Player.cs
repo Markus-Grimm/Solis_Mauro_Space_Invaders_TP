@@ -28,9 +28,13 @@ public class Player : Character
   
     void Update()
     {
-        Mov();
+        if (!GameController.reset)
+        {
+            Mov();
+        }
+            
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if ((Input.GetMouseButtonDown(0) && !GameController.reset) || (Input.GetKeyDown(KeyCode.Space) && !GameController.reset))
         {
             Shoot();
         }
@@ -72,6 +76,11 @@ public class Player : Character
         {
             lifeply -= dmgenemy;
             if (lifeply <= 0) Dead(); else StartCoroutine(Damaged(1f));
+        }
+
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Dead();
         }
     }
 

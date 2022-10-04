@@ -61,12 +61,12 @@ public class Enemy : Character
 
     protected override void Shoot() { }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
 
-        if (collision.transform.tag == "Bala")
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
-            lifebot -= 5;
+            this.gameObject.SetActive(false);
         }
 
     }

@@ -9,12 +9,12 @@ public class Player : Character
 
     public int lifeply, dmgenemy;
     public Animator anim;
-    public bool dmged;
+    public bool _dmged;
     public GameController GameController;
 
     //Disparo
-    public GameObject launchposition;
-    public GameObject proyectil;
+    public Projectile projectilePrefab;
+    private bool _shootActive;
     public float firerate = 0.5f;
     public float elapsedTime = 0f;
     
@@ -30,26 +30,27 @@ public class Player : Character
     {
         Mov();
 
-        Shoot();               
-    }
-
-
-    private void FixedUpdate()
-    {
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
     }
 
 
     protected override void Shoot()
     {
-        elapsedTime += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && elapsedTime > firerate)
+        if (!_shootActive)
         {
             this.GetComponent<AudioSource>().Play();
+            Projectile projectile = Instantiate(this.projectilePrefab, this.transform.position + new Vector3(0, 0.6f, 0), Quaternion.identity);
+            projectile.destroyed += ProjectileDestroyed;
+            _shootActive = true;
+        }        
+    }
 
-            Instantiate(proyectil, launchposition.transform.position + new Vector3(0.6f, 0, 0), launchposition.transform.rotation);
-
-            elapsedTime = 0f;
-        }
+    private void ProjectileDestroyed()
+    {
+        _shootActive = false;
     }
 
     protected override void Mov() 
@@ -69,7 +70,7 @@ public class Player : Character
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Enemy1" && !dmged)
+        if (collision.transform.tag == "Enemy1" && !_dmged)
         {
             StartCoroutine(Damaged(1f));
             Debug.Log("daño");
@@ -80,12 +81,12 @@ public class Player : Character
 
     public IEnumerator Damaged(float valcrono)
     {
-        dmged = true;
+        _dmged = true;
         anim.SetFloat("DMG", 2);
 
         yield return new WaitForSeconds(valcrono);
 
-        dmged = false;
+        _dmged = false;
         anim.SetFloat("DMG", 0);
     }
 

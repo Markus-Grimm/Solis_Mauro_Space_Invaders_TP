@@ -1136,7 +1136,7 @@ MonoBehaviour:
   dmged: 0
   GameController: {fileID: 2141348503}
   launchposition: {fileID: 758015427}
-  proyectil: {fileID: 4775715541745931249, guid: 8b63dd5a9183b5344b3c38d68b1540ed, type: 3}
+  proyectil: {fileID: 5981648505975763056, guid: a6a9bad3a8049e64eb59ae956e151c9c, type: 3}
   firerate: 0.1
   elapsedTime: 0
 --- !u!61 &769249667

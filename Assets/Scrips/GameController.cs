@@ -18,8 +18,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         scr = 0;
-        Spawn();
-        StartCoroutine(Spawncrono(tspawn));
     }
 
     
@@ -29,20 +27,6 @@ public class GameController : MonoBehaviour
         {
             Victory();
         }
-    }
-
-    public IEnumerator Spawncrono(float valcrono)
-    {
-        Spawn();
-        yield return new WaitForSeconds(valcrono);
-        StartCoroutine(Spawncrono(tspawn));
-    }
-
-    public void Spawn()
-    {
-        x = Random.Range(0.0f,0.0f);
-        y = Random.Range(-5f,5f);
-        Instantiate(enemy, this.transform.position - new Vector3(0, y, 0), enemy.transform.rotation);
     }
 
     public void AumentoScore()

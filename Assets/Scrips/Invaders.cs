@@ -75,7 +75,12 @@ public class Invaders : MonoBehaviour
                 {
                     AdvanceLine();
                 }
-            }
+
+                if (enemy.position.y <= -10)
+                {
+                    gameController.Defeat();
+                }
+            }            
         }
         
     }
@@ -108,7 +113,6 @@ public class Invaders : MonoBehaviour
                 {
                     GameObject projectil = ObjectPool.sharedInstance.GetPooledObject2();
                     Projectile projectile = projectil.GetComponent<Projectile>();
-                    projectile.instanciate += ProjectileInstantiate;
                     if (projectil != null)
                     {
                         projectil.transform.position = enemy.position;
@@ -116,25 +120,9 @@ public class Invaders : MonoBehaviour
                         projectil.SetActive(true);
                     }
 
-                    //ProjectileInstantiate();
-                    //Instantiate(this.missilePrefab, enemy.position, Quaternion.identity);
                     break;
                 }
             }
         }
-    }
-
-    private void ProjectileInstantiate()
-    {
-        GameObject projectil = ObjectPool.sharedInstance.GetPooledObject2();
-        Projectile projectile = projectil.GetComponent<Projectile>();
-        projectile.instanciate += ProjectileInstantiate;
-        if (projectil != null)
-        {
-            //projectil.transform.position = enemy.position;
-            projectil.transform.rotation = Quaternion.identity;
-            projectil.SetActive(true);
-        }
-
     }
 }

@@ -669,6 +669,7 @@ MonoBehaviour:
   animSprite:
   - {fileID: 21300000, guid: d6a5fdfb1008a284d988087c339ac32a, type: 3}
   - {fileID: 21300000, guid: d6a5fdfb1008a284d988087c339ac32a, type: 3}
+  dead: {fileID: 0}
   animTime: 1
 --- !u!61 &408612862
 BoxCollider2D:
@@ -2086,6 +2087,7 @@ MonoBehaviour:
   animSprite:
   - {fileID: 21300000, guid: d6a5fdfb1008a284d988087c339ac32a, type: 3}
   - {fileID: 21300000, guid: d6a5fdfb1008a284d988087c339ac32a, type: 3}
+  dead: {fileID: 0}
   animTime: 1
 --- !u!95 &1276689231
 Animator:
@@ -2379,11 +2381,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92460ae2e16e9bd48bdacc923dced02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lines: 8
+  lines: 6
   columns: 12
   enemy:
   - {fileID: 6222909190760961174, guid: ecaef04427dd72345a4eea892be19fed, type: 3}
   - {fileID: 6222909190760961174, guid: ecaef04427dd72345a4eea892be19fed, type: 3}
+  - {fileID: 5611880974688617659, guid: 68bed328271e07b418dcdd98797a85e7, type: 3}
   - {fileID: 5611880974688617659, guid: 68bed328271e07b418dcdd98797a85e7, type: 3}
   - {fileID: 5611880974688617659, guid: 68bed328271e07b418dcdd98797a85e7, type: 3}
   - {fileID: 9073649899242119345, guid: 872e2ebde7d69ea42b3ccd059697b18f, type: 3}

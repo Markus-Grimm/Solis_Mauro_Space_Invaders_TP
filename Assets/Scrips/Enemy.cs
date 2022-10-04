@@ -9,6 +9,7 @@ public class Enemy : Character
     public GameController gameController;
 
     public Sprite[] animSprite;
+    public Sprite dead;
     public float animTime = 1f;
     public System.Action killed;
 
@@ -43,6 +44,7 @@ public class Enemy : Character
 
     private void Dead(int score) 
     {
+        
         gameController.AumentoScore(score);
         this.gameObject.SetActive(false); 
         this.killed.Invoke();        
@@ -54,14 +56,20 @@ public class Enemy : Character
         {
             if (this.gameObject.layer == LayerMask.NameToLayer("GreatEnemy"))
             {
-                Dead(gameController.maxscr / 2);
+                StartCoroutine(DeadAnim(1.0f, gameController.maxscr / 2));                
             }
             else
             {
-                Dead(1);
+                StartCoroutine(DeadAnim(0.1f, 1));
             }
         }
+    }
 
+    private IEnumerator DeadAnim(float valcrono, int score)
+    {
+        _spriteRenderer.sprite = this.dead;        
+        yield return new WaitForSeconds(valcrono);
+        Dead(score);
     }
 
 

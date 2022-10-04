@@ -16,7 +16,7 @@ public class Enemy : Character
     private SpriteRenderer _spriteRenderer;
     private int _animFrame;
 
-
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class Enemy : Character
         movspd = 1.0f;
         lifebot = 10;
 
+        audioManager = AudioManager.FindObjectOfType<AudioManager>();
         gameController = GameController.FindObjectOfType<GameController>();
 
         InvokeRepeating(nameof(AnimateSprite), this.animTime, this.animTime);
@@ -43,8 +44,7 @@ public class Enemy : Character
 
 
     private void Dead(int score) 
-    {
-        
+    {        
         gameController.AumentoScore(score);
         this.gameObject.SetActive(false); 
         this.killed.Invoke();        
@@ -67,7 +67,8 @@ public class Enemy : Character
 
     private IEnumerator DeadAnim(float valcrono, int score)
     {
-        _spriteRenderer.sprite = this.dead;        
+        _spriteRenderer.sprite = this.dead;
+        audioManager.PlayEnemyDead();
         yield return new WaitForSeconds(valcrono);
         Dead(score);
     }

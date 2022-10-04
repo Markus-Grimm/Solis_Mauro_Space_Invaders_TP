@@ -22,11 +22,14 @@ public class Player : Character
     private delegate void GameOver();
     GameOver events;
 
+    public AudioManager audioManager;
+
     void Start()
     {
         movspd = 5f;
         rb = GetComponent<Rigidbody2D>();
 
+        audioManager = AudioManager.FindObjectOfType<AudioManager>();
     }
 
   
@@ -50,6 +53,7 @@ public class Player : Character
         if (!_shootActive)
         {
             _shootActive = true;
+            audioManager.PlayPlayer();
             ProjectileInstantiate();
         }        
     }

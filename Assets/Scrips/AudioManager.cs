@@ -8,11 +8,8 @@ public class AudioManager : MonoBehaviour
 
     public GameObject player;
     public AudioSource playerAudioS;
-    public AudioClip laser;
 
-    public GameObject enemy;
     public AudioSource enemyAudioS;
-    public AudioClip enemydead;
 
 
     public static AudioManager Instance
@@ -41,8 +38,17 @@ public class AudioManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerAudioS = player.GetComponent<AudioSource>();
 
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
-        enemyAudioS = enemy.GetComponent<AudioSource>();
+        enemyAudioS = this.GetComponent<AudioSource>();
+    }
+
+    public void PlayPlayer()
+    {
+        playerAudioS.Play();
+    }
+
+    public void PlayEnemyDead()
+    {
+        enemyAudioS.Play();
     }
 
 

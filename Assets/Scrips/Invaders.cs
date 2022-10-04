@@ -5,12 +5,18 @@ using UnityEngine;
 public class Invaders : MonoBehaviour
 {
     public int lines, columns;
-
     public Enemy[] enemy;
 
+    public Vector3 direction = Vector2.right;
+    public AnimationCurve movspd;
+
+    public int amountKilled { get; private set; }
+    public int totalInvaders => this.lines * this.columns;
+    public float percentKilled => (float)this.amountKilled / (float)this.totalInvaders;
 
     private void Start()
-    {
+    {                
+
         for (int line = 0; line < this.lines; line++)
         {
             float width = 1.0f * (this.columns - 1);
@@ -21,6 +27,7 @@ public class Invaders : MonoBehaviour
             for (int col = 0; col < this.columns; col++)
             {               
                 Enemy invader = Instantiate(this.enemy[line], this.transform);
+                invader.killed += InvaderKilled;
                 Vector3 position = linePosition;
                 position.x += col * 1.0f;
                 invader.transform.localPosition = position;
@@ -29,8 +36,6 @@ public class Invaders : MonoBehaviour
     }
 
 
-    public Vector3 direction = Vector2.right;
-    public float movspd = 1.0f;
     private void Update()
     {
         Mov();
@@ -38,7 +43,7 @@ public class Invaders : MonoBehaviour
 
     private void Mov()
     {
-        this.transform.position += direction * this.movspd * Time.deltaTime;
+        this.transform.position += direction * this.movspd.Evaluate(this.percentKilled) * Time.deltaTime;
 
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
         Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
@@ -59,7 +64,6 @@ public class Invaders : MonoBehaviour
             }
         }
     }
-
     private void AdvanceLine()
     {
         direction.x *= -1.0f;
@@ -69,5 +73,8 @@ public class Invaders : MonoBehaviour
         this.transform.position = position;
     }
 
-
+    private void InvaderKilled()
+    {
+        this.amountKilled++;
+    }
 }

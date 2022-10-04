@@ -10,6 +10,7 @@ public class Enemy : Character
 
     public Sprite[] animSprite;
     public float animTime = 1f;
+    public System.Action killed;
 
     private SpriteRenderer _spriteRenderer;
     private int _animFrame;
@@ -47,17 +48,11 @@ public class Enemy : Character
 
     protected override void Dead() 
     {
-        Destroy(gameObject);
+        this.killed.Invoke();
+        this.gameObject.SetActive(false);
     }
 
-
-
-    protected override void Mov() 
-    {
-
-    }
-
-
+    protected override void Mov() { }
 
     protected override void Shoot() { }
 
@@ -66,7 +61,7 @@ public class Enemy : Character
 
         if (collider.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
-            this.gameObject.SetActive(false);
+            Dead();
         }
 
     }

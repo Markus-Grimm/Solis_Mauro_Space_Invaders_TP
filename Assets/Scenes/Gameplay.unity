@@ -2192,13 +2192,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines: 8
-  columns: 14
+  columns: 12
   enemy:
   - {fileID: 6222909190760961174, guid: ecaef04427dd72345a4eea892be19fed, type: 3}
   - {fileID: 6222909190760961174, guid: ecaef04427dd72345a4eea892be19fed, type: 3}
   - {fileID: 5611880974688617659, guid: 68bed328271e07b418dcdd98797a85e7, type: 3}
   - {fileID: 5611880974688617659, guid: 68bed328271e07b418dcdd98797a85e7, type: 3}
   - {fileID: 9073649899242119345, guid: 872e2ebde7d69ea42b3ccd059697b18f, type: 3}
+  direction: {x: 1, y: 0, z: 0}
+  movspd: 0.6
 --- !u!4 &1528748667
 Transform:
   m_ObjectHideFlags: 0

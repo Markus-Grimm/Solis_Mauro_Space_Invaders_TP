@@ -8,7 +8,8 @@ public class Invaders : MonoBehaviour
 
     public Enemy[] enemy;
 
-    private void Awake()
+
+    private void Start()
     {
         for (int line = 0; line < this.lines; line++)
         {
@@ -18,7 +19,7 @@ public class Invaders : MonoBehaviour
             Vector3 linePosition = new Vector3(centering.x, centering.y + (line * 1.0f), 0.0f);
 
             for (int col = 0; col < this.columns; col++)
-            {
+            {               
                 Enemy invader = Instantiate(this.enemy[line], this.transform);
                 Vector3 position = linePosition;
                 position.x += col * 1.0f;
@@ -27,10 +28,45 @@ public class Invaders : MonoBehaviour
         }
     }
 
-    private void Start()
+
+    public Vector3 direction = Vector2.right;
+    public float movspd = 1.0f;
+    private void Update()
     {
-        lines = 6;
-        columns = 12;
+        Mov();
+    }
+
+    private void Mov()
+    {
+        this.transform.position += direction * this.movspd * Time.deltaTime;
+
+        Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
+        Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
+
+        foreach (Transform enemy in this.transform)
+        {
+            if (!enemy.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+            if (direction == Vector3.right && enemy.position.x >= (rightEdge.x - 1.0f))
+            {
+                AdvanceLine();
+            }
+            else if (direction == Vector3.left && enemy.position.x <= (leftEdge.x + 1.0f))
+            {
+                AdvanceLine();
+            }
+        }
+    }
+
+    private void AdvanceLine()
+    {
+        direction.x *= -1.0f;
+
+        Vector3 position = this.transform.position;
+        position.y -= 1.0f;
+        this.transform.position = position;
     }
 
 

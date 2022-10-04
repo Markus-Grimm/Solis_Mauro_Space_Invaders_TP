@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-
     public int lifebot, dmgbala;
 
     public GameController gameController;
@@ -15,6 +14,8 @@ public class Enemy : Character
     private SpriteRenderer _spriteRenderer;
     private int _animFrame;
 
+
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -22,8 +23,7 @@ public class Enemy : Character
 
     void Start()
     {
-
-        movspd = 1f;
+        movspd = 1.0f;
         lifebot = 10;
 
         gameController = GameController.FindObjectOfType<GameController>();
@@ -42,7 +42,7 @@ public class Enemy : Character
     
     void Update()
     {
-        
+        Mov();
     }
 
     protected override void Dead() 
@@ -50,7 +50,14 @@ public class Enemy : Character
         Destroy(gameObject);
     }
 
-    protected override void Mov() { }
+
+
+    protected override void Mov() 
+    {
+
+    }
+
+
 
     protected override void Shoot() { }
 

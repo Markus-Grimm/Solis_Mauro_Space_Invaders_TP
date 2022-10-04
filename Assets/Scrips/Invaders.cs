@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Invaders : MonoBehaviour
 {
-    public int lines, columns;
-    public Enemy[] enemy;
-
     public GameController gameController;
+
+    public int lines, columns;
+    public float missileAttackRate; 
+    public Enemy[] enemy;
 
     public Vector3 direction = Vector2.right;
     public AnimationCurve movspd;
     public Projectile missilePrefab;
-
-    public float missileAttackRate;
 
     public int amountKilled { get; private set; }
     public int amountAlive => this.totalInvaders - this.amountKilled;

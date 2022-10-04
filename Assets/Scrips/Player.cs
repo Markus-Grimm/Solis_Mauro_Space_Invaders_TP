@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : Character
 {
@@ -17,12 +18,15 @@ public class Player : Character
     private bool _shootActive;
     public float firerate = 0.5f;
     public float elapsedTime = 0f;
-    
+
+    private delegate void GameOver();
+    GameOver events;
 
     void Start()
     {
         movspd = 5f;
         rb = GetComponent<Rigidbody2D>();
+
     }
 
   
@@ -45,8 +49,7 @@ public class Player : Character
     {
         if (!_shootActive)
         {
-            _shootActive = true; 
-            this.GetComponent<AudioSource>().Play();
+            _shootActive = true;
             ProjectileInstantiate();
         }        
     }
@@ -97,10 +100,32 @@ public class Player : Character
     }
 
     protected override void Dead()
-    {        
-        GameObject.Destroy(this.gameObject);
-        GameController.Defeat();
+    {
+        if (events != null)
+        {
+            events -= GameController.Victory;
+            events -= GameController.Defeat;
+            events -= GameController.LoseLife;
+        }
+
+        if (GameController.lifes > 0)
+        {
+            this.transform.position = new Vector3(0, this.transform.position.y, this.transform.position.z);
+            events += GameController.LoseLife;
+            events();
+        }
+        else
+        {
+            GameObject.Destroy(this.gameObject);
+            events += GameController.Defeat;
+            events(); 
+        }
         
+        
+
+        
+        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

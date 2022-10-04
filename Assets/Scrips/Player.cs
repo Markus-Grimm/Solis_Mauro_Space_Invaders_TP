@@ -29,8 +29,8 @@ public class Player : Character
     void Update()
     {
         if (!GameController.reset)
-        {
-            Mov();
+        {           
+            Mov();            
         }
             
 
@@ -45,22 +45,63 @@ public class Player : Character
     {
         if (!_shootActive)
         {
+            _shootActive = true; 
             this.GetComponent<AudioSource>().Play();
-            Projectile projectile = Instantiate(this.projectilePrefab, this.transform.position + new Vector3(0, 0.6f, 0), Quaternion.identity);
-            projectile.destroyed += ProjectileDestroyed;
-            _shootActive = true;
+            //Instantiate(this.projectilePrefab, this.transform.position + new Vector3(0, 0.6f, 0), Quaternion.identity);
+            ProjectileInstantiate();
         }        
+    }
+
+    private void ProjectileInstantiate()
+    {
+        GameObject projectil = ObjectPool.sharedInstance.GetPooledObject();
+        Projectile projectile = projectil.GetComponent<Projectile>();
+        projectile.instanciate += ProjectileInstantiate;
+        if (projectil != null)
+        {
+            projectil.transform.position = this.transform.position + new Vector3(0, 0.6f, 0);
+            projectil.transform.rotation = Quaternion.identity;
+            projectil.SetActive(true);
+        }
+        //projectile.destroyed += ProjectileDestroyed;
+        StartCoroutine(AttackSpeed(0.1f));
+
     }
 
     private void ProjectileDestroyed()
     {
+        StartCoroutine(AttackSpeed(0.1f));
+    }
+
+    private IEnumerator AttackSpeed(float valcrono)
+    {
+        yield return new WaitForSeconds(valcrono);
         _shootActive = false;
     }
 
     protected override void Mov() 
     {
         movement.x = Input.GetAxisRaw("Horizontal");
-        rb.MovePosition(rb.position + movement * movspd * Time.fixedDeltaTime);
+        if ((this.gameObject.transform.position.x >= -7) && (this.gameObject.transform.position.x <= 7))
+        {
+            rb.MovePosition(rb.position + movement * movspd * Time.fixedDeltaTime);
+        }
+        else
+        {
+            if (this.gameObject.transform.position.x >= -7)
+            {
+                this.transform.Translate(this.transform.position.x * (-1.9f), 0, 0);
+                return;
+            }
+            else
+            {
+                if (this.gameObject.transform.position.x <= 7)
+                {
+                    this.transform.Translate(this.transform.position.x * (-1.9f), 0, 0);
+                    return;
+                }                
+            }
+        }
     }
 
     protected override void Dead()

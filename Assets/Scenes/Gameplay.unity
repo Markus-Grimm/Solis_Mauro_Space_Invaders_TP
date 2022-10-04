@@ -1311,7 +1311,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.75}
+  m_Size: {x: 0.26, y: 0.16}
   m_EdgeRadius: 0
 --- !u!82 &769249668
 AudioSource:
@@ -2814,6 +2814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141348504}
   - component: {fileID: 2141348503}
+  - component: {fileID: 2141348505}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -2833,10 +2834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67bc6a0444ff60b458db3afae6090939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8575061213175889291, guid: 4d62392730fc196499362eb8dcb7f1ce, type: 3}
-  x: 0
-  y: 0
-  tspawn: 2
   gamedefeat: {fileID: 1138035278}
   gamevictory: {fileID: 391348445}
   Score: {fileID: 605794808}
@@ -2859,3 +2856,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2141348505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141348502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc8482ef36298b4f9fa18db3849b60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 5981648505975763056, guid: a6a9bad3a8049e64eb59ae956e151c9c, type: 3}
+  amountToPool: 10

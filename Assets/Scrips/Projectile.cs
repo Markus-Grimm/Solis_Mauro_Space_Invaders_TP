@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float speed = 18f;
 
     public System.Action destroyed;
+    public System.Action instanciate;
 
     void Update()
     {
@@ -21,7 +22,7 @@ public class Projectile : MonoBehaviour
         {
             this.destroyed.Invoke();            
         }
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
 }

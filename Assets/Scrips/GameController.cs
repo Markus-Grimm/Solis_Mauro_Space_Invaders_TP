@@ -6,16 +6,14 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
-    public GameObject enemy;
-    public float x,y,tspawn;
-
     //Interfaz, derrota y victoria
     public Text gamedefeat, gamevictory, Score;
     public bool lose, reset;
     public int scr, maxscr;
 
     public GameObject enemycheat;
+
+
 
     void Start()
     {

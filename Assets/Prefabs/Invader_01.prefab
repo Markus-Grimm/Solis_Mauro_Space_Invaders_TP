@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1809531526800627380, guid: 64fb7775c3cbfa143a058aee1f4b10ba, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Enemy1
       objectReference: {fileID: 0}
     - target: {fileID: 3494095276346972432, guid: 64fb7775c3cbfa143a058aee1f4b10ba, type: 3}
       propertyPath: m_Size.x
@@ -131,6 +131,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3398877ea4cc87d4b9fcee0b0dd8e59e, type: 3}
+    - target: {fileID: 8033096204799104706, guid: 64fb7775c3cbfa143a058aee1f4b10ba, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033096204799104706, guid: 64fb7775c3cbfa143a058aee1f4b10ba, type: 3}
+      propertyPath: m_Color.g
+      value: 0.16509432
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033096204799104706, guid: 64fb7775c3cbfa143a058aee1f4b10ba, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7283946
+      objectReference: {fileID: 0}
     - target: {fileID: 8033096204799104706, guid: 64fb7775c3cbfa143a058aee1f4b10ba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

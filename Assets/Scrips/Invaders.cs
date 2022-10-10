@@ -19,10 +19,13 @@ public class Invaders : MonoBehaviour
     public int totalInvaders => this.lines * this.columns;
     public float percentKilled => (float)this.amountKilled / (float)this.totalInvaders;
 
+    public float percentToSurrender => (float)this.totalInvaders * 0.46f;    
+
     private void Start()
     {
         gameController = GameController.FindObjectOfType<GameController>();
-        gameController.maxscr = totalInvaders;
+        gameController.percentToSurrender = Mathf.RoundToInt(percentToSurrender);
+        gameController.amountAlive = amountAlive;
 
         missileAttackRate = 1.0f;
         InvokeRepeating(nameof(MissileAttack), this.missileAttackRate, this.missileAttackRate);
@@ -44,22 +47,17 @@ public class Invaders : MonoBehaviour
             }
         }
     }
-
-
     private void Update()
     {
         Mov();
     }
-
     private void Mov()
     {
         if (!gameController.reset)
         {
             this.transform.position += direction * this.movspd.Evaluate(this.percentKilled) * Time.deltaTime;
-
             Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
             Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
-
             foreach (Transform enemy in this.transform)
             {
                 if (!enemy.gameObject.activeInHierarchy)
@@ -80,8 +78,7 @@ public class Invaders : MonoBehaviour
                     gameController.Defeat();
                 }
             }            
-        }
-        
+        }        
     }
     private void AdvanceLine()
     {
@@ -91,12 +88,11 @@ public class Invaders : MonoBehaviour
         position.y -= 1.0f;
         this.transform.position = position;
     }
-
     private void InvaderKilled()
     {
         this.amountKilled++;
+        gameController.amountAlive = amountAlive;
     }
-
     private void MissileAttack()
     {
         if (!gameController.reset)
@@ -107,7 +103,6 @@ public class Invaders : MonoBehaviour
                 {
                     continue;
                 }
-
                 if (Random.value < (1.0f / (float)this.amountAlive))
                 {
                     GameObject projectil = ObjectPool.sharedInstance.GetPooledObject2();
@@ -118,7 +113,6 @@ public class Invaders : MonoBehaviour
                         projectil.transform.rotation = Quaternion.identity;
                         projectil.SetActive(true);
                     }
-
                     break;
                 }
             }

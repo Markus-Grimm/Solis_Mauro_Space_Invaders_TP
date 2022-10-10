@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public int lifebot, dmgbala;
+    public int lifebot, dmgbala, scrmul;
 
     public GameController gameController;
 
@@ -27,6 +27,7 @@ public class Enemy : Character
     {
         movspd = 1.0f;
         lifebot = 10;
+        scrmul = 10;
 
         audioManager = AudioManager.FindObjectOfType<AudioManager>();
         gameController = GameController.FindObjectOfType<GameController>();
@@ -54,14 +55,24 @@ public class Enemy : Character
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
-            if (this.gameObject.layer == LayerMask.NameToLayer("GreatEnemy"))
+            switch (this.gameObject.transform.tag)
             {
-                StartCoroutine(DeadAnim(1.0f, gameController.maxscr / 2));                
-            }
-            else
-            {
-                StartCoroutine(DeadAnim(0.1f, 1));
-            }
+                case "Enemy":
+                    StartCoroutine(DeadAnim(0.1f, 1 * scrmul));
+                    gameController.Victory();
+                    break;
+                case "Enemy1":
+                    StartCoroutine(DeadAnim(0.1f, 1 * scrmul));
+                    break;
+                case "Enemy2":
+                    StartCoroutine(DeadAnim(0.1f, 2 * scrmul));
+                    break;
+                case "Enemy3":
+                    StartCoroutine(DeadAnim(0.1f, 3 * scrmul));
+                    break;
+                default:
+                    break;
+            }            
         }
     }
 

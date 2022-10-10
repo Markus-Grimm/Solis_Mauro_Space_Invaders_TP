@@ -15,7 +15,6 @@ public class Projectile : MonoBehaviour
         this.transform.position += this.direction * this.speed * Time.deltaTime;                
     }
 
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (this.destroyed != null)

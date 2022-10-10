@@ -222,7 +222,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 863d321cabdcfd34e9a2067c47fb974c, type: 3}
-  m_Color: {r: 0.13725491, g: 0.5529412, b: 0.87843144, a: 1}
+  m_Color: {r: 0.16275728, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 408612860}
   m_Layer: 11
   m_Name: MysteryShip (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -665,6 +665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifebot: 0
   dmgbala: 0
+  scrmul: 0
   gameController: {fileID: 0}
   animSprite:
   - {fileID: 21300000, guid: d6a5fdfb1008a284d988087c339ac32a, type: 3}
@@ -862,7 +863,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 863d321cabdcfd34e9a2067c47fb974c, type: 3}
-  m_Color: {r: 0.13725491, g: 0.5529412, b: 0.87843144, a: 1}
+  m_Color: {r: 0.16275728, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1085,8 +1086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -239.01, y: 494.34}
-  m_SizeDelta: {x: 321.97, y: 77.99}
+  m_AnchoredPosition: {x: -64.69501, y: 494.34}
+  m_SizeDelta: {x: 670.6, y: 77.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &605794808
 MonoBehaviour:
@@ -1466,7 +1467,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 75da769a4a2697f4db77e67cd42a80fa, type: 3}
-  m_Color: {r: 0.15566039, g: 0.6324345, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1984,7 +1985,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 863d321cabdcfd34e9a2067c47fb974c, type: 3}
-  m_Color: {r: 0.13725491, g: 0.5529412, b: 0.87843144, a: 1}
+  m_Color: {r: 0.16275728, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2093,7 +2094,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 863d321cabdcfd34e9a2067c47fb974c, type: 3}
-  m_Color: {r: 0.13725491, g: 0.5529412, b: 0.87843144, a: 1}
+  m_Color: {r: 0.16275728, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2197,7 +2198,7 @@ GameObject:
   - component: {fileID: 1276689231}
   m_Layer: 11
   m_Name: MysteryShip
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2307,6 +2308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifebot: 0
   dmgbala: 0
+  scrmul: 0
   gameController: {fileID: 0}
   animSprite:
   - {fileID: 21300000, guid: d6a5fdfb1008a284d988087c339ac32a, type: 3}
@@ -2432,7 +2434,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 863d321cabdcfd34e9a2067c47fb974c, type: 3}
-  m_Color: {r: 0.13725491, g: 0.5529412, b: 0.87843144, a: 1}
+  m_Color: {r: 0.16275728, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3070,7 +3072,8 @@ MonoBehaviour:
   lose: 0
   reset: 0
   scr: 0
-  maxscr: 0
+  percentToSurrender: 0
+  amountAlive: 0
   lifes: 0
   enemycheat: {fileID: 408612859}
 --- !u!4 &2141348504
@@ -3104,5 +3107,5 @@ MonoBehaviour:
   pooledObjects2: []
   laser: {fileID: 5981648505975763056, guid: a6a9bad3a8049e64eb59ae956e151c9c, type: 3}
   missile: {fileID: 5444606518397019155, guid: f127da197f4e38f4fabbb71b586d5fe9, type: 3}
-  amountToPool: 8
+  amountToPool: 4
   amountToPool2: 2

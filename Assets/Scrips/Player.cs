@@ -69,7 +69,7 @@ public class Player : Character
             projectil.transform.rotation = Quaternion.identity;
             projectil.SetActive(true);
         }
-        StartCoroutine(AttackSpeed(0.1f));
+        StartCoroutine(AttackSpeed(0.5f));
     }     
 
     private IEnumerator AttackSpeed(float valcrono)
@@ -123,13 +123,7 @@ public class Player : Character
             GameObject.Destroy(this.gameObject);
             events += GameController.Defeat;
             events(); 
-        }
-        
-        
-
-        
-        
-
+        }        
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

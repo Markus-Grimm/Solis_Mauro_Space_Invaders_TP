@@ -10,12 +10,26 @@ public class GameController : MonoBehaviour
     //Interfaz, derrota y victoria
     public Text gamedefeat, gamevictory, Score, lifestxt;
     public bool lose, reset;
-    public int scr, maxscr, lifes;
+    public int scr, percentToSurrender, amountAlive, lifes;
 
     public GameObject enemycheat;
 
     private delegate void GameOver();
     GameOver events;
+
+    private static GameController instance = null;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {
@@ -23,14 +37,13 @@ public class GameController : MonoBehaviour
         reset = false;
         scr = 0;
         lifes = 3;
-        Score.text = "Score: " + scr + " / " + maxscr;
+        Score.text = "Score: " + scr;
         lifestxt.text = "Lifes: " + lifes;
     }
-
     
     void Update()
     {
-        if (scr >= maxscr)
+        if (amountAlive <= percentToSurrender)
         {
             if (events != null)
             {
@@ -63,7 +76,7 @@ public class GameController : MonoBehaviour
     public void AumentoScore(int score)
     {
         scr += score;
-        Score.text = "Score: " + scr + " / " + maxscr;
+        Score.text = "Score: " + scr;
     }
 
     public void LoseLife()
@@ -83,5 +96,5 @@ public class GameController : MonoBehaviour
         gamedefeat.text = "Game Over\nPress R to restart or E to return menu";
         reset = true;
     }
-
+    
 }

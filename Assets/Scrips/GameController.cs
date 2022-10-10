@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     //Interfaz, derrota y victoria
-    public Text gamedefeat, gamevictory, Score, lifestxt;
+    public Text gamedefeat, gamevictory, score, lifestxt, pause;
     public bool lose, reset;
     public int scr, percentToSurrender, amountAlive, lifes;
 
@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
         reset = false;
         scr = 0;
         lifes = 3;
-        Score.text = "Score: " + scr;
+        score.text = "Score: " + scr;
         lifestxt.text = "Lifes: " + lifes;
     }
     
@@ -71,12 +71,18 @@ public class GameController : MonoBehaviour
         {
             enemycheat.SetActive(true);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            reset = !reset;
+            pause.gameObject.SetActive(!pause.gameObject.activeSelf);
+        }
     }
 
     public void AumentoScore(int score)
     {
         scr += score;
-        Score.text = "Score: " + scr;
+        this.score.text = "Score: " + scr;
     }
 
     public void LoseLife()

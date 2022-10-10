@@ -62,13 +62,13 @@ public class Enemy : Character
                     gameController.Victory();
                     break;
                 case "Enemy1":
-                    StartCoroutine(DeadAnim(0.1f, 1 * scrmul));
+                    StartCoroutine(DeadAnim(0.1f, 3 * scrmul));
                     break;
                 case "Enemy2":
                     StartCoroutine(DeadAnim(0.1f, 2 * scrmul));
                     break;
                 case "Enemy3":
-                    StartCoroutine(DeadAnim(0.1f, 3 * scrmul));
+                    StartCoroutine(DeadAnim(0.1f, 1 * scrmul));
                     break;
                 default:
                     break;
